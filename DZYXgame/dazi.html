@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>【打字练习游戏】打字练习小游戏大全_打字练习单机游戏</title>
+    <style>
+        *{
+            padding: 0;
+            margin:0;
+
+        }
+        body,html{
+            width: 100%;
+            height: 100%;
+            background:url(img/1.jpg) no-repeat ;
+            background-size: 100% 100%;
+            overflow: hidden;
+        }
+        .box{
+            width: 100%;
+            height: 100%;
+            padding-top: 10px;
+            background: rgba(0,0,0,.2);
+            position: relative;
+        }
+        .score-box,.live-box{
+            width: 100px;
+            padding: 10px;
+            background: #FFD000;
+            font: 16px/32px '微软雅黑';
+            color:#FF6800;
+            text-align: center;
+            border:1px dotted red;
+            position: absolute;
+            left:20px;
+            border-radius: 10px;
+        }
+        .score-box{
+            top:30px;
+        }
+        .live-box{
+            top:100px;
+        }
+        .score,.live{
+            display: inline-block;
+            color: red;
+            font-weight: bold;
+        }
+        .start{
+            width: 100%;
+            height:100%;
+            background: url(img/2.jpg) no-repeat center center;
+            background-size: cover;
+            position: absolute;
+            left:0;
+            top:0px;
+            z-index: 999;
+            transition: opacity .3s;
+        }
+        .start-button{
+            width: 150px;
+            height: 60px;
+            background: #FF6800;
+            text-align: center;
+            line-height: 40px;
+            color:#FFD000;
+            border:1px solid red;
+            border-radius: 20px;
+            position: absolute;
+            left:50%;
+            margin-left: 100px;
+            top:50%;
+            font-size: 24px;
+            line-height: 60px;
+            margin-top: 20px;
+            font-family: '华文彩云';
+
+        }
+        .start-button:hover{
+            color: #00FFFF;
+            background: pink;
+        }
+        .title{
+            font-size: 50px;
+            font-family: '华文彩云';
+            position: absolute;
+            left:50%;
+            margin-left: 100px;
+            color: #FF6800;
+            top:20px;
+        }
+        .shuo{
+            position: absolute;
+            left:50%;
+            margin-left: 100px;
+            top:100px;
+        }
+    </style>
+</head>
+<body>
+     <div class="box">
+         <div class="start">
+             <div class="title">打字游戏</div>
+             <div class="shuo"><strong>游戏介绍：</strong><br><br>一个打字游戏，很好玩的游戏！可以有效的提高你的打字速度哦！
+                 <br>根据提示打出相对应的字母！
+                 <br><br><strong>操作方法：</strong><br>
+                 <br>A~  Z打字
+                 <br>点击[play]开始游戏</div>
+             <div class="start-button">PLAY
+             </div>
+         </div>
+         <div class="score-box">
+             <span>分数为</span><div class="score">0</div>
+         </div>
+         <div class="live-box">
+             <span>生命值为</span><div class="live">10</div>
+
+         </div>
+         <!--生命值-->
+     </div>
+
+
+</body>
+<script>
+    function Dzyx(dom,scoreobj) {
+        this.length=5;
+//        创建个空数组，用来存储新产生的img
+        this.currentArr=[];
+        //创建每次移动的初始化速度，top增加值
+        this.speed=5;
+        //创建初始生命值
+        this.live=10;
+        //获取生命值对象，之后要更改生命值的内容
+        this.liveobj=dom;
+        //获取分数对象，之后要更改分数内容
+        this.scoreobj=scoreobj;
+        //初始化当前分数是0分
+        this.score=0;
+    }
+    Dzyx.prototype= {
+        //总动画的方法汇总
+        play:function () {
+            this.getLetter();
+            this.move();
+            this.keydown();
+        },
+        //每次获取5个字母
+        getLetter:function () {
+            for(var i=0;i<this.length;i++){
+                this.getRandom();
+            }
+        },
+        //获取一个随机的字母
+        getRandom:function () {
+            do{
+            //创建字母ASCII的随机数，并转化为大写字母65-90
+                var code=Math.round(Math.random()*25+65);
+                var letter=String.fromCharCode(code);
+            }while (this.check(letter));//当返回true的时候，重新获取字母
+//            创建个dom对象，img,给img设置属性，图片，唯一的标识alt,设置随机的top，left 值
+            var img=document.createElement('img');
+            img.src=`img/${letter}.png`;
+            img.alt=letter;
+            img.style.cssText=`
+                   position: absolute;
+                   top:${Math.random()*50+20}px;
+                   left:${Math.random()*800+100}px;
+                `;
+
+            document.body.appendChild(img);
+//           将创建的img放到一个空数组里面，之后对获得的所有的图片进行判断
+            this.currentArr.push(img);
+
+        },
+        //判断随机产生的字母是否有重复的
+        check:function (letter) {
+            //判断，只要有一个条件满足，返回true,否则返回false
+            return this.currentArr.some(function (dom) {
+                return dom.alt==letter;
+            });
+        },
+        //实现移动效果，移动的是top值
+        move:function () {
+            let that=this;
+            //设置时间函数，要做的事情和时间
+            this.t=setInterval(function () {
+                //遍历产生的img对象组成的数组，获取数组本身的高度，加上每次增加的值
+               for(var i=0;i<that.currentArr.length;i++){
+                   var  currheight=that.currentArr[i].offsetTop;
+                   var top=currheight+that.speed;
+                   that.currentArr[i].style.top=top+'px';
+//                   如果最终的高度大于500时
+                   if(top>500){
+//                       生命值每次减一,生命值对象内容修改
+                       that.live--;
+                       that.liveobj.innerHTML=that.live;
+//                       当前移动到500高度是从页面中删除dom
+                       document.body.removeChild(that.currentArr[i]);
+//                        更新数组里的img,用万能删除方法删除
+                       that.currentArr.splice(i,1);
+//                       重新获取一个img对象
+                       that.getRandom();
+//                       如果生命值小于0分时，游戏结束，清除时间函数，并跳出
+                       if(that.live<=0){
+                           alert("game over");
+                           clearInterval(that.t);
+                           return;
+                       }
+                       //生命值内容改变
+
+                   }
+               }
+
+            },50)
+        },
+//        键盘按下事件
+        keydown:function () {
+            let that=this;
+//            键盘按下，只能用document调用
+            document.onkeydown=function (e) {
+                    var key=e.key; //获取的是键盘的小写字母
+                    var letter=key.toUpperCase(); //小写转为大写
+//                    通过遍历找到数组的下标
+                    var  index=that.currentArr.findIndex(function (value) {
+                        return value.alt==letter;
+                    })
+                   if(index!=-1) { //如果找到满足条件的下标不等于-1
+                       document.body.removeChild(that.currentArr[index]);
+                       //页面中删除这个dom对象
+                       that.currentArr.splice(index, 1);
+//                       分数自增
+                       that.score++;
+//                       分数dom对象加到页面中
+                       that.scoreobj.innerHTML = that.score;
+//                       删除了之后重新获取一个dom对象img
+                       that.getRandom();
+//                       如果分数大于10分时，进入下一关
+                       if (that.score > 10) {
+                           //带确认和取消的弹出框
+                           let result = confirm("恭喜进入下一关，是否进入下一关？");
+//                           如果返回值为true
+                           if (result) {
+//                               直接进入下一关
+                               that.next();
+                           } else {
+//                               如果选择否，关闭窗口
+                               window.close();
+                           }
+                       }
+                   }
+            }
+
+        },
+        next:function () {
+//            执行此函数时，直接停止时间函数
+           clearInterval(this.t);
+//           将页面中显示的img删除
+           this.currentArr.forEach(function (value) {
+               document.body.removeChild(value); //删除所有页面的数组
+
+           });
+//            将原来的生命值每次加2
+            this.live+=2;
+//            将数组清空
+            this.currentArr=[];
+//            将速度每次加1
+            this.speed+=1;
+//            每次出现的长度加1
+            this.length+=1;
+//            将分数清空
+            this.score=0;
+            this.scoreobj.innerHTML=this.score;
+            this.liveobj.innerHTML=this.live;
+            //重新执行动画
+            this.play();
+        }
+
+    }
+    let liveobj=document.querySelector('.live');
+    let scoreobj=document.querySelector('.score');
+    let button=document.querySelector('.start-button');
+    let start=document.querySelector('.start');
+    let arr=[5,4,3,2,1];
+    button.onclick=function () {
+        let obj=new Dzyx(liveobj,scoreobj);
+        start.style.opacity=0;
+        obj.play();
+    }
+</script>
+</html>

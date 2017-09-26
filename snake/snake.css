@@ -1,0 +1,105 @@
+*{
+    padding:0;
+    margin:0;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+    background: url(img/1.jpg) no-repeat center center;
+    overflow: hidden;
+}
+h2{
+    margin-top: 10px;
+    color:#FDBB00 ;
+    text-align:center;
+    margin-left: 20px;
+}
+.bigbox{
+    float:left;
+    position: relative;
+    margin-top: 50px;
+}
+.about{
+    width:200px;
+    height: 400px;
+    display:inline-block;
+    margin-left:3%;
+    color: #fff;
+    float: left;
+}
+.about span{
+    font-weight: bold;
+}
+.onload{
+    width: 600px;
+    height:600px;
+    position: absolute;
+    left:0;
+    right:0;
+    top:40px;
+    margin:0 auto;
+    box-shadow: 0 0 2px 2px rgba(255,255,255,1);
+}
+.onload img{
+    width: 100%;
+    height: 100%;
+}
+.start{
+    width: 150px;
+    height: 40px;
+}
+.box{
+    width: 600px;
+    height: 600px;
+    position: absolute;
+    left:0;
+    top:40px;
+    right:0;
+    margin:auto;
+    background: rgba(0,0,0,.7);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 3px rgba(255,255,255,1);
+}
+.box div{
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    float: left;
+}
+.food{
+    background:url(img/2017-07-01_211325.png) no-repeat center center;
+    background-size: 33px 33px;
+    border-radius: 50%;
+}
+.she{
+    background: url(img/3.png) no-repeat;
+    background-size: 30px 30px ;
+    border-radius:50%;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,.5);
+
+}
+.button{
+    width:100px;
+    height: 100%;
+    position: absolute;
+    right:0;
+    top:50%;
+    transform: translateX(-50%);
+}
+.stop,.onstart,.restart,.score{
+    width: 100%;
+    height: 50px;
+    background: #FDBB00;
+    border:2px solid #1AC900;
+    color: #fff;
+    font: 18px/50px "华文彩云";
+    border-radius: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.score:hover,.stop:hover,.onstart:hover,.restart:hover{
+    background: #fff;
+    color: #FDBB00;
+    font-family: "Arial";
+    border:3px solid pink;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>画板</title>
+    <script src="canvas.js"></script>
+    <script src="class.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin:0;
+            box-sizing: border-box;
+            list-style: none;
+        }
+        body,html{
+            width:100%;
+            height: 100%;
+        }
+        canvas{
+            border:1px solid rgba(0,0,0,.18);
+            position:fixed;
+            left:10%;
+            top:0px;
+            background:#fff;
+        }
+        .box{
+            position: fixed;
+            top:0px;
+            left:0;
+            width: 10%;
+            height: 100%;
+            background: #C9D2FC;
+            border:1px solid  #FF8C00;
+        }
+        .box button,input[type='color']{
+            width: 60px;
+            height: 40px;
+            background: #000;
+            border:1px solid rgba(0,0,0,.18);
+            color: #fff;
+            text-align: center;
+            line-height:30px;
+            outline: none;
+            /*margin-left:20px;*/
+            margin-top:5px;
+        }
+        input[type='file']{
+            background: #000;
+        }
+        .box .active{
+            background:#FF8C00;
+            color:#000;
+            border:none;
+        }
+        .box .active1{
+            background:pink;
+            color:#000;
+            border:none;
+        }
+    </style>
+</head>
+<body>
+     <div class="box">
+         <div class="on">
+             <div>功能区</div>
+             <button type="clear">清空画布</button>
+             <button type="remove">撤销<-</button>
+         </div>
+         <div class="fun">
+             <div>形状区</div>
+             <button id="delete" class="active">擦除</button>
+             <button id="line">线</button>
+             <button id="rect">矩形</button>
+             <button id="circle">圆</button>
+             <button id="poly">多边形</button>
+             <button id="text">文字</button>
+             <button id="linearrect">渐变矩形</button>
+             <button id="linearcircle">渐变圆</button>
+             <div>颜色区</div>
+             <input type = "color" >
+             <input type='file'>
+             <div>填充区</div>
+             <button id="stroke">线型</button>
+             <button id="fill">填充</button>
+         </div>
+     </div>
+     <canvas></canvas>
+</body>
+</html>
+
