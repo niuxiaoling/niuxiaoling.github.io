@@ -362,6 +362,7 @@ header .min-head .right ul li a{
   width: 100%;
   position: relative;
   padding-bottom: 50px;
+  margin-bottom: 10px;
 }
 
 .box .skillbg {
@@ -410,7 +411,7 @@ header .min-head .right ul li a{
 }
 
 .box .skill .skill-contact {
-  margin-top: 50px;
+  margin:10px auto;
   width: 90%;
   background: #fff;
   border-radius: 5px;
@@ -825,7 +826,7 @@ header .min-head .right ul li a{
   border-radius: 50%;
   color: #1b98f8;
   border: 1px solid #1b98f8;
-  transition: transform 1s ease-in;
+  transition: transform .4s ease-in;
 }
 
 .product .left-content ul.big li .left-log .iconfont {
@@ -957,11 +958,13 @@ header .min-head .right ul li a{
 }
 
 .photo-box .column ul li:nth-child(2) {
-  background: url(../img/field_3.jpg) no-repeat;
+  background: url(../img/intro-bg.jpg) no-repeat ;
+  background-size: 100%;
 }
 
 .photo-box .column ul li:nth-child(3) {
-  background: url(../img/mt-1027-header-bg.jpg) no-repeat;
+  background: url(../img/image01.png) no-repeat;
+  background-size: 100%;
 }
 
 .photo-box .column ul li.active {
@@ -1069,8 +1072,10 @@ header .min-head .right ul li a{
 }
 
 .link-box .link .about1 {
-  width: 100%;
+  width: 90%;
   height: 100%;
+  margin:10px auto;
+  box-shadow: 0 1px  10px  rgba(0,0,0,.2);
 }
 
 .link-box .link .imgbox {
